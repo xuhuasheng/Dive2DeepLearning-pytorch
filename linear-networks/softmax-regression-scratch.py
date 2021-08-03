@@ -14,10 +14,14 @@ b = torch.zeros(num_outputs, requires_grad=True)
 X = torch.tensor([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]])
 X.sum(0, keepdim=True), X.sum(1, keepdim=True)
 
+# ######################################################
+# softmax实现
+# ######################################################
 def softmax(X):
-    X_exp = torch.exp(X)
-    partition = X_exp.sum(dim=1, keepdim=True) 
-    return X_exp / partition
+    X_exp = torch.exp(X)                        # 广播机制 对每个元素求exp
+    partition = X_exp.sum(dim=1, keepdim=True)  # 在列的维度上求和，保持形状
+    return X_exp / partition                    # 广播机制 对每个exp元素 除以各自总和
+# ######################################################
 
 X = torch.normal(0, 1, (2, 5))
 X_prob = softmax(X)
