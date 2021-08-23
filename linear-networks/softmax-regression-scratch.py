@@ -38,8 +38,10 @@ y_hat[[0, 1], y]
 # cross_entropy交叉熵实现
 # ######################################################
 def cross_entropy(y_hat, y):
-    return -torch.log(y_hat[range(len(y_hat)), y])
-
+    # cross_entropy = -sigma{(y_i)log(yhat_i)} = -log(yhat_y)
+    return -torch.log(y_hat[range(len(y_hat)), y]) # 取y_hat的所有行里的y索引的列
+    # return -torch.log(y_hat[:, y]) # 取y_hat的所有行里的y索引的列
+# ######################################################
 cross_entropy(y_hat, y)
 
 def accuracy(y_hat, y):  
